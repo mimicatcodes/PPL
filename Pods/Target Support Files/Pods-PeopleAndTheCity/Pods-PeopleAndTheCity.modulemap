@@ -1,0 +1,6 @@
+framework module Pods_PeopleAndTheCity {
+  umbrella header "Pods-PeopleAndTheCity-umbrella.h"
+
+  export *
+  module * { export * }
+}
