@@ -6,5 +6,6 @@ target 'PeopleAndTheCity' do
   use_frameworks!
   # Pods for PeopleAndTheCity
   pod 'MGSwipeTableCell'
+  pod 'IQKeyboardManagerSwift'
 
 end

@@ -10,9 +10,7 @@ import UIKit
 import NotificationCenter
 
 class AddPersonVC: UIViewController {
-    
-    //TODO: Textfield keyboard handling
-    
+        
     // MARK: Properties
     
     @IBOutlet weak var editInstructionLabel: UILabel!
@@ -21,6 +19,7 @@ class AddPersonVC: UIViewController {
     @IBOutlet weak var submitButton: CustomButton!
     
     var personToEdit: Person? = nil
+    var activeTextField:UITextField?
     
     // MARK: View Lifecycle
     
@@ -39,11 +38,15 @@ class AddPersonVC: UIViewController {
     }
     
     // MARK: Methods
-
+    
     @IBAction func submitButtonTapped(_ sender: Any) {
         
-        guard let name = nameField.text, name != "" else { return }
-        guard let city = cityField.text, city != "" else { return }
+        guard let name = nameField.text, name != "" else {
+            
+            return }
+        guard let city = cityField.text, city != "" else {
+            
+            return }
         
         if let person = personToEdit {
             let personWithNewInfo = Person(id: person.id, name: name, favoriteCity: city)
@@ -90,3 +93,12 @@ class AddPersonVC: UIViewController {
         }
     }
 }
+
+extension AddPersonVC : UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+

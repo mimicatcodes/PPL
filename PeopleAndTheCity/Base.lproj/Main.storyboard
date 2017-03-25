@@ -48,7 +48,7 @@
                                                     <rect key="frame" x="13" y="8" width="349" height="102"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1QL-uG-GNf">
-                                                            <rect key="frame" x="0.0" y="16" width="349" height="70.5"/>
+                                                            <rect key="frame" x="0.0" y="16.5" width="349" height="70.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Luna" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gF7-M2-2yr">
                                                                     <rect key="frame" x="157" y="0.0" width="35.5" height="22"/>
@@ -179,6 +179,9 @@
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="delegate" destination="B6U-n5-qNY" id="Zjm-6q-8Xu"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -186,7 +189,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wuI-Se-Axb">
-                                <rect key="frame" x="37" y="188.5" width="300" height="90"/>
+                                <rect key="frame" x="37" y="189" width="300" height="90"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yout Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdM-ZU-lKf">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
@@ -209,6 +212,9 @@
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="delegate" destination="B6U-n5-qNY" id="mpP-Fr-iWm"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -249,7 +255,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eOL-Qs-ySA">
-                                <rect key="frame" x="37" y="84.5" width="300" height="74"/>
+                                <rect key="frame" x="37" y="85" width="300" height="74"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's Your" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4x-vs-vdX">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="37"/>
@@ -269,7 +275,7 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To edit, tap on the text field and press save" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7uJ-kJ-MQt">
-                                <rect key="frame" x="37" y="166" width="301" height="13.5"/>
+                                <rect key="frame" x="37" y="166.5" width="301" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
