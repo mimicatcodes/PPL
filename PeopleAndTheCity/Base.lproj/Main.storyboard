@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--People & the city-->
+        <!--People & the City-->
         <scene sceneID="Sbx-l0-42M">
             <objects>
                 <viewController id="Vsa-Ny-gIF" customClass="MainViewController" customModule="PeopleAndTheCity" customModuleProvider="target" sceneMemberID="viewController">
@@ -126,7 +126,7 @@
                             <constraint firstItem="tvF-0X-HvL" firstAttribute="leading" secondItem="ikP-qh-c0z" secondAttribute="leading" id="yyJ-GI-aL3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="People &amp; the city" id="wOF-w8-yGu">
+                    <navigationItem key="navigationItem" title="People &amp; the City" id="wOF-w8-yGu">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZiL-ad-1RY">
                             <color key="tintColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
