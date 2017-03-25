@@ -139,12 +139,14 @@
                     <navigationItem key="navigationItem" title="People and the City" id="rXi-Uh-FAV">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="0C7-S0-idZ">
                             <connections>
-                                <segue destination="B6U-n5-qNY" kind="presentation" id="vmq-h7-D22"/>
+                                <action selector="addPersonButtonTapped:" destination="BYZ-38-t0r" id="bAj-xz-azQ"/>
+                                <segue destination="B6U-n5-qNY" kind="presentation" id="hdQ-J8-zK0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="DQc-Wy-qkC" id="ZCw-QQ-2eL"/>
+                        <segue destination="B6U-n5-qNY" kind="presentation" identifier="toAddPerson" id="5wT-xu-AFz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -260,4 +262,7 @@
             <point key="canvasLocation" x="1076" y="138.98050974512745"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="hdQ-J8-zK0"/>
+    </inferredMetricsTieBreakers>
 </document>

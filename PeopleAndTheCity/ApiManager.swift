@@ -9,14 +9,13 @@
 import UIKit
 
 typealias JSON = [String: Any]
-typealias ServiceResponse = (JSON, NSError?) -> Void
 
 class ApiManager: NSObject {
     
     static let sharedInstance = ApiManager()
     
     func getPersons(completion: @escaping ([Person]) -> Void) {
-        let baseUrlString = UrlForAPI.all
+        let baseUrlString = UrlForAPI.people
         
         guard let url = URL(string:baseUrlString) else {
             print("Error occured - No URL found")
@@ -53,8 +52,7 @@ class ApiManager: NSObject {
         task.resume()
     }
     
-    func addPerson(id: Int, name: String, favoriteCity: String, completion: @escaping (JSON) -> Void) {
-        
+    func add(person: Person, completion: @escaping (JSON) -> Void) {
         let baseUrlString = UrlForAPI.people
         
         guard let url = URL(string:baseUrlString) else {
@@ -64,11 +62,48 @@ class ApiManager: NSObject {
         let session = URLSession.shared
         var request = URLRequest(url:url)
         
-        let newPerson = ["name": name, "favoritecity": favoriteCity] as [String : Any]
+        let newPerson = ["name": person.name, "favoritecity": person.favoriteCity] as [String : Any]
         
         if let jsonData = try? JSONSerialization.data(withJSONObject: newPerson, options: []) {
-            
             request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = jsonData
+            
+            let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
+                guard let data = data else {
+                    print(error?.localizedDescription ?? "Error occured while posting JSON to the server")
+                    return
+                }
+                
+                do {
+                    guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? JSON else { return }
+                    
+                    DispatchQueue.main.async {
+                        completion(json)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            })
+            task.resume()
+        }
+    }
+    
+    func update(person: Person, completion:@escaping (JSON) -> Void) {
+        let baseUrlString = UrlForAPI.people + "/\(person.id)"
+        
+        guard let url = URL(string:baseUrlString) else {
+            print("Error occured - No URL found")
+            return
+        }
+        
+        let session = URLSession.shared
+        var request = URLRequest(url:url)
+        
+        let newInfo = ["name": person.name, "favoritecity": person.favoriteCity] as JSON
+        
+        if let jsonData = try? JSONSerialization.data(withJSONObject: newInfo, options: []) {
+            request.httpMethod = "PUT"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = jsonData
             
@@ -90,6 +125,48 @@ class ApiManager: NSObject {
             })
             task.resume()
         }
+        
         print("Unale to create jsonData")
+
+    }
+
+    func delete(person: Person, completion:@escaping () -> Void) {
+        let baseUrlString = UrlForAPI.people + "/\(person.id)"
+        
+        guard let url = URL(string:baseUrlString) else {
+            print("Error occured - No URL found")
+            return }
+        
+        let session = URLSession.shared
+        var request = URLRequest(url:url)
+        request.httpMethod = "DELETE"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let task = session.dataTask(with: request) { (data, response, error) in
+            
+            if error != nil {
+                print(error?.localizedDescription ?? "Error occured while deleting person from the server")
+            }
+            
+            guard let data = data else {
+                print(error?.localizedDescription ?? "Error occured while posting JSON to the server")
+                return
+            }
+            
+            do {
+                guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? JSON else { return }
+                print(json)
+                print("💋")
+                DispatchQueue.main.async {
+                    completion()
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+
+        }
+        task.resume()
     }
 }
+
+

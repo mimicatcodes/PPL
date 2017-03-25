@@ -9,9 +9,14 @@
 import Foundation
 
 final class Person {
-    var id: Int
+    var id: Int = 100
     var name: String
     var favoriteCity: String
+    
+    init(name: String, favoriteCity: String){
+        self.name = name
+        self.favoriteCity = favoriteCity
+    }
     
     init(id: Int, name: String, favoriteCity: String) {
         self.id = id

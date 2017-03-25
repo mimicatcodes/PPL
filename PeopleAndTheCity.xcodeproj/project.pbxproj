@@ -18,6 +18,8 @@
 		DDD991131E8487FE004ED9AD /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD991121E8487FE004ED9AD /* PersonCell.swift */; };
 		DDD991161E848ACA004ED9AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD991151E848ACA004ED9AD /* Constants.swift */; };
 		DDD9932D1E84A2EA004ED9AD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD9932C1E84A2EA004ED9AD /* User.swift */; };
+		DDD993361E84D8B5004ED9AD /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = DDD993351E84D8B5004ED9AD /* UIScrollView+EmptyDataSet.m */; };
+		DDD993381E858A86004ED9AD /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD993371E858A86004ED9AD /* Request.swift */; };
 		E59B99C1E5BBA75CE816203C /* Pods_PeopleAndTheCity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7292859070B2AC72DF2C3F2 /* Pods_PeopleAndTheCity.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,10 @@
 		DDD991121E8487FE004ED9AD /* PersonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
 		DDD991151E848ACA004ED9AD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DDD9932C1E84A2EA004ED9AD /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DDD993331E84D8B4004ED9AD /* PeopleAndTheCity-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PeopleAndTheCity-Bridging-Header.h"; sourceTree = "<group>"; };
+		DDD993341E84D8B5004ED9AD /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
+		DDD993351E84D8B5004ED9AD /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
+		DDD993371E858A86004ED9AD /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		E7292859070B2AC72DF2C3F2 /* Pods_PeopleAndTheCity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeopleAndTheCity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -130,6 +136,9 @@
 		DDD991051E846541004ED9AD /* Supporting Documents */ = {
 			isa = PBXGroup;
 			children = (
+				DDD993341E84D8B5004ED9AD /* UIScrollView+EmptyDataSet.h */,
+				DDD993351E84D8B5004ED9AD /* UIScrollView+EmptyDataSet.m */,
+				DDD993331E84D8B4004ED9AD /* PeopleAndTheCity-Bridging-Header.h */,
 				DD4EEB1D1E8219AB005FB594 /* LaunchScreen.storyboard */,
 				DD4EEB1B1E8219AB005FB594 /* Assets.xcassets */,
 				DD4EEB201E8219AB005FB594 /* Info.plist */,
@@ -143,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				DDD991071E846645004ED9AD /* ApiManager.swift */,
+				DDD993371E858A86004ED9AD /* Request.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -191,6 +201,7 @@
 					DD4EEB101E8219AB005FB594 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 8E59TDTBWW;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -239,7 +250,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2F07FCA573F36D3B469F1703 /* [CP] Embed Pods Frameworks */ = {
@@ -286,6 +297,8 @@
 				DDD9932D1E84A2EA004ED9AD /* User.swift in Sources */,
 				DDD991161E848ACA004ED9AD /* Constants.swift in Sources */,
 				DD4EEB171E8219AB005FB594 /* MainViewController.swift in Sources */,
+				DDD993381E858A86004ED9AD /* Request.swift in Sources */,
+				DDD993361E84D8B5004ED9AD /* UIScrollView+EmptyDataSet.m in Sources */,
 				DD4EEB151E8219AB005FB594 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,11 +421,14 @@
 			baseConfigurationReference = DD8E6331006E97EF1B81748E /* Pods-PeopleAndTheCity.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 8E59TDTBWW;
 				INFOPLIST_FILE = PeopleAndTheCity/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mimicatcodes.PeopleAndTheCity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PeopleAndTheCity/PeopleAndTheCity-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -422,11 +438,13 @@
 			baseConfigurationReference = 3AAAED40350DE15E412769B7 /* Pods-PeopleAndTheCity.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 8E59TDTBWW;
 				INFOPLIST_FILE = PeopleAndTheCity/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mimicatcodes.PeopleAndTheCity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PeopleAndTheCity/PeopleAndTheCity-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
