@@ -12,7 +12,8 @@ import NotificationCenter
 class AddPersonVC: UIViewController {
     
     //TODO: Textfield keyboard handling
-    // TODO: Order 
+    
+    // MARK: Properties
     
     @IBOutlet weak var editInstructionLabel: UILabel!
     @IBOutlet weak var nameField: UITextField!
@@ -20,6 +21,8 @@ class AddPersonVC: UIViewController {
     @IBOutlet weak var submitButton: CustomButton!
     
     var personToEdit: Person? = nil
+    
+    // MARK: View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +38,8 @@ class AddPersonVC: UIViewController {
         configureUITitles()
     }
     
+    // MARK: Methods
+
     @IBAction func submitButtonTapped(_ sender: Any) {
         
         guard let name = nameField.text, name != "" else { return }
@@ -44,19 +49,21 @@ class AddPersonVC: UIViewController {
             let personWithNewInfo = Person(id: person.id, name: name, favoriteCity: city)
             DispatchQueue.main.async {
                 ApiManager.sharedInstance.update(person: personWithNewInfo, completion: { (newPerson) in
-                    NotificationCenter.default.post(name: NSNotification.Name("refreshData"), object: nil)
+                    NotificationCenter.default.post(name: NotificationName.refreshData, object: nil)
+                    print("✓ ID: \(personWithNewInfo.id)")
+                    print("✓ New name: \(personWithNewInfo.name)")
+                    print("New ❤︎ city: \(personWithNewInfo.favoriteCity)")
                 })
             }
         } else {
             let newPerson = Person(id: 0, name: name, favoriteCity: city)
             DispatchQueue.main.async {
                 ApiManager.sharedInstance.add(person: newPerson, completion: { (json) in
-                    print(json.description)
-                    NotificationCenter.default.post(name: NSNotification.Name("refreshData"), object: nil)
+                    print("Added \(json.description)")
+                    NotificationCenter.default.post(name: NotificationName.refreshData, object: nil)
                 })
             }
         }
-        
         dismiss(animated: true, completion: nil)
     }
     
@@ -76,10 +83,10 @@ class AddPersonVC: UIViewController {
     func configureUITitles(){
         if personToEdit != nil {
             editInstructionLabel.isHidden = false
-            submitButton.setTitle("Save", for: .normal)
+            submitButton.setTitle(ButtonTitle.save, for: .normal)
         } else {
             editInstructionLabel.isHidden = true
-            submitButton.setTitle("Submit", for: .normal)
+            submitButton.setTitle(ButtonTitle.submit, for: .normal)
         }
     }
 }

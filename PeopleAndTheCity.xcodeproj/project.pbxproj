@@ -18,7 +18,6 @@
 		DDD991131E8487FE004ED9AD /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD991121E8487FE004ED9AD /* PersonCell.swift */; };
 		DDD991161E848ACA004ED9AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD991151E848ACA004ED9AD /* Constants.swift */; };
 		DDD993361E84D8B5004ED9AD /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = DDD993351E84D8B5004ED9AD /* UIScrollView+EmptyDataSet.m */; };
-		DDD993381E858A86004ED9AD /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD993371E858A86004ED9AD /* Request.swift */; };
 		DDD9935A1E861B38004ED9AD /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD993591E861B38004ED9AD /* Extension.swift */; };
 		DDD993611E86252F004ED9AD /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD993601E86252F004ED9AD /* CustomTextField.swift */; };
 		DDD993631E8628D0004ED9AD /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD993621E8628D0004ED9AD /* CustomButton.swift */; };
@@ -44,7 +43,6 @@
 		DDD993331E84D8B4004ED9AD /* PeopleAndTheCity-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PeopleAndTheCity-Bridging-Header.h"; sourceTree = "<group>"; };
 		DDD993341E84D8B5004ED9AD /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		DDD993351E84D8B5004ED9AD /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
-		DDD993371E858A86004ED9AD /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		DDD993591E861B38004ED9AD /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		DDD993601E86252F004ED9AD /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		DDD993621E8628D0004ED9AD /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -160,7 +158,6 @@
 			isa = PBXGroup;
 			children = (
 				DDD991071E846645004ED9AD /* ApiManager.swift */,
-				DDD993371E858A86004ED9AD /* Request.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -309,7 +306,6 @@
 				DDD991161E848ACA004ED9AD /* Constants.swift in Sources */,
 				DD4EEB171E8219AB005FB594 /* MainViewController.swift in Sources */,
 				DDD993611E86252F004ED9AD /* CustomTextField.swift in Sources */,
-				DDD993381E858A86004ED9AD /* Request.swift in Sources */,
 				DDD993361E84D8B5004ED9AD /* UIScrollView+EmptyDataSet.m in Sources */,
 				DD4EEB151E8219AB005FB594 /* AppDelegate.swift in Sources */,
 			);

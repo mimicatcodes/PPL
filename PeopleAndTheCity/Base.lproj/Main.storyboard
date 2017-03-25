@@ -130,7 +130,6 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZiL-ad-1RY">
                             <color key="tintColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="addPersonButtonTapped:" destination="Vsa-Ny-gIF" id="FZD-hd-0AD"/>
                                 <segue destination="B6U-n5-qNY" kind="presentation" id="gvd-da-uts"/>
                             </connections>
                         </barButtonItem>

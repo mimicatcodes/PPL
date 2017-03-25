@@ -14,26 +14,24 @@ class ApiManager: NSObject {
     
     static let sharedInstance = ApiManager()
     
+    // MARK: GET METHOD
     func getPersons(completion: @escaping ([Person]) -> Void) {
         let baseUrlString = UrlForAPI.people
         
         guard let url = URL(string:baseUrlString) else {
-            print("Error occured - No URL found")
+            print(ErrorMessage.noUrl.rawValue)
             return }
         
         let session = URLSession.shared
         var request = URLRequest(url:url)
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue(Request.value, forHTTPHeaderField: Request.accept)
         
         let task = session.dataTask(with: request) { (data, response, error) in
             if error != nil {
-                print(error?.localizedDescription ?? "Error downloading JSON")
+                print(error?.localizedDescription ?? ErrorMessage.retrievingError.rawValue)
             }
             
-            guard let data_ = data else {
-                print("No data")
-                return
-            }
+            guard let data_ = data else { return }
 
             do {
                 let json = try JSONSerialization.jsonObject(with: data_, options: [])
@@ -53,27 +51,28 @@ class ApiManager: NSObject {
         task.resume()
     }
     
+    // MARK: POST METHOD
     func add(person: Person, completion: @escaping (JSON) -> Void) {
         let baseUrlString = UrlForAPI.people
         
         guard let url = URL(string:baseUrlString) else {
-            print("Error occured - No URL found")
+            print(ErrorMessage.noUrl.rawValue)
             return }
         
         let session = URLSession.shared
         var request = URLRequest(url:url)
         
-        let newPerson = ["name": person.name, "favoritecity": person.favoriteCity] as [String : Any]
+        let newPerson = [PersonKey.name: person.name, PersonKey.favoriteCity: person.favoriteCity] as [String : Any]
         
         if let jsonData = try? JSONSerialization.data(withJSONObject: newPerson, options: []) {
-            request.httpMethod = "POST"
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            request.httpMethod = HTTPMethod.post
+            request.addValue(Request.value, forHTTPHeaderField: Request.headerKey)
+            request.addValue(Request.value, forHTTPHeaderField: Request.accept)
             request.httpBody = jsonData
             
             let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
                 guard let data = data else {
-                    print(error?.localizedDescription ?? "Error occured while posting JSON to the server")
+                    print(error?.localizedDescription ?? ErrorMessage.uploadingError.rawValue)
                     return
                 }
                 
@@ -91,28 +90,29 @@ class ApiManager: NSObject {
         }
     }
     
+    // MARK: PUT METHOD
     func update(person: Person, completion:@escaping (JSON) -> Void) {
         let baseUrlString = UrlForAPI.people + "/\(person.id)"
         
         guard let url = URL(string:baseUrlString) else {
-            print("Error occured - No URL found")
+            print(ErrorMessage.noUrl.rawValue)
             return
         }
         
         let session = URLSession.shared
         var request = URLRequest(url:url)
         
-        let newInfo = ["name": person.name, "favoritecity": person.favoriteCity] as JSON
+        let newInfo = [PersonKey.name: person.name, PersonKey.favoriteCity: person.favoriteCity] as JSON
         
         if let jsonData = try? JSONSerialization.data(withJSONObject: newInfo, options: []) {
-            request.httpMethod = "PUT"
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            request.httpMethod = HTTPMethod.put
+            request.addValue(Request.value, forHTTPHeaderField: Request.headerKey)
+            request.addValue(Request.value, forHTTPHeaderField: Request.accept)
             request.httpBody = jsonData
             
             let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
                 guard let data = data else {
-                    print(error?.localizedDescription ?? "Error occured while posting JSON to the server")
+                    print(error?.localizedDescription ?? ErrorMessage.updatingError.rawValue)
                     return
                 }
                 
@@ -128,33 +128,28 @@ class ApiManager: NSObject {
             })
             task.resume()
         }
-        
-        print("Unale to create jsonData")
-
     }
-
+    
+    // MARK: DELETE METHOD
     func delete(person: Person, completion:@escaping () -> Void) {
         let baseUrlString = UrlForAPI.people + "/\(person.id)"
         
         guard let url = URL(string:baseUrlString) else {
-            print("Error occured - No URL found")
+            print(ErrorMessage.noUrl.rawValue)
             return }
         
         let session = URLSession.shared
         var request = URLRequest(url:url)
-        request.httpMethod = "DELETE"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.httpMethod = HTTPMethod.delete
+        request.addValue(Request.value, forHTTPHeaderField: Request.accept)
         
         let task = session.dataTask(with: request) { (data, response, error) in
             
             if error != nil {
-                print(error?.localizedDescription ?? "Error occured while deleting person from the server")
+                print(error?.localizedDescription ?? ErrorMessage.deletingError.rawValue)
             }
             
-            guard let data = data else {
-                print(error?.localizedDescription ?? "Error occured while posting JSON to the server")
-                return
-            }
+            guard let data = data else { return }
             
             do {
                 guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? JSON else { return }
