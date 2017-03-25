@@ -2,7 +2,7 @@
 //  Extension.swift
 //  PeopleAndTheCity
 //
-//  Created by Mirim An on 3/24/17.
+//  Created by Luna An on 3/24/17.
 //  Copyright © 2017 Mimicatcodes. All rights reserved.
 //
 

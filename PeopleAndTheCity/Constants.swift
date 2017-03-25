@@ -2,7 +2,7 @@
 //  Constants.swift
 //  PeopleAndTheCity
 //
-//  Created by Mirim An on 3/23/17.
+//  Created by Luna An on 3/23/17.
 //  Copyright © 2017 Mimicatcodes. All rights reserved.
 //
 

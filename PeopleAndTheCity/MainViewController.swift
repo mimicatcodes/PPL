@@ -26,18 +26,6 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*if let font = UIFont(name: Fonts.montserratSemiBold, size: 16) {
-            print("-----------------------------------")
-            navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font,  NSForegroundColorAttributeName: UIColor.white]
-        }
-
-        navigationController?.navigationBar.barTintColor = Colors.tealish
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.layer.borderColor = UIColor.clear.cgColor
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()*/
-        
         getPersons()
 
         refreshControl()
@@ -75,13 +63,13 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
     }
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        let str = "No data available yet."
+        let str = "No data available yet"
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
         return NSAttributedString(string: str, attributes: attrs)
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        let str = "Please add your name and favorite city!"
+        let str = "Tap ' + ' to add data"
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
         return NSAttributedString(string: str, attributes: attrs)
     }
