@@ -22,7 +22,8 @@ class ApiManager: NSObject {
             return }
         
         let session = URLSession.shared
-        let request = URLRequest(url:url)
+        var request = URLRequest(url:url)
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
         
         let task = session.dataTask(with: request) { (data, response, error) in
             if error != nil {
@@ -67,6 +68,7 @@ class ApiManager: NSObject {
         if let jsonData = try? JSONSerialization.data(withJSONObject: newPerson, options: []) {
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
             request.httpBody = jsonData
             
             let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
@@ -105,6 +107,7 @@ class ApiManager: NSObject {
         if let jsonData = try? JSONSerialization.data(withJSONObject: newInfo, options: []) {
             request.httpMethod = "PUT"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
             request.httpBody = jsonData
             
             let task = session.dataTask(with: request, completionHandler: { (data, response, error) in

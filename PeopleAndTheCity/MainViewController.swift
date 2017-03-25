@@ -9,14 +9,10 @@
 import UIKit
 import MGSwipeTableCell
 import NotificationCenter
-import Alamofire
 
 var dataCache = NSCache<AnyObject, AnyObject>()
 
 //TODO: use cache to retrieve data fast - setObject
-//TODO: Multithreading issue
-//TODO: Needs a unique ID for the person object to edit and delete from DB
-
 
 class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate{
     
@@ -24,25 +20,41 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
     var personToEdit: Person?
     
     let refresher = UIRefreshControl()
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /*if let font = UIFont(name: Fonts.montserratSemiBold, size: 16) {
+            print("-----------------------------------")
+            navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font,  NSForegroundColorAttributeName: UIColor.white]
+        }
+
+        navigationController?.navigationBar.barTintColor = Colors.tealish
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.layer.borderColor = UIColor.clear.cgColor
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()*/
+        
+        getPersons()
+
         refreshControl()
         tableView.separatorStyle = .none
         
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
         tableView.tableFooterView = UIView()
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("refreshData"), object: nil, queue: nil) { (notification) in
+            DispatchQueue.main.async {
+                self.getPersons()
+            }
+        }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        getPersons()
-    }
-    
-    @IBAction func addPersonButtonTapped(_ sender: Any) {
+    @IBAction func addPersonButtonTapped(_ sender: UIBarButtonItem) {
         
     }
     
@@ -76,12 +88,14 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
     
     func configureSwipeButtons(cell:PersonCell, indexPath: IndexPath){
         
-        let rightButton1 = MGSwipeButton(title: "Delete", icon: UIImage(named:""), backgroundColor: UIColor.blue) { (sender: MGSwipeTableCell) -> Bool in
+        // height 102
+        
+        let deleteButton = MGSwipeButton(title: "Delete", icon: UIImage(named:""), backgroundColor: UIColor.black) { (sender: MGSwipeTableCell) -> Bool in
             self.alertForDelete(indexPath: indexPath)
             return true
         }
         
-        let rightButton2 = MGSwipeButton(title: "Edit", icon: UIImage(named:""), backgroundColor: UIColor.yellow)  { (sender: MGSwipeTableCell) -> Bool in
+        let editButton = MGSwipeButton(title: "Edit", icon: UIImage(named:""), backgroundColor: UIColor.gray)  { (sender: MGSwipeTableCell) -> Bool in
             DispatchQueue.global().async {
                 self.personToEdit = self.persons?[indexPath.row]
                 print(self.personToEdit?.name ?? "Sean")
@@ -94,7 +108,7 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
             return true
         }
         
-        cell.rightButtons = [rightButton1, rightButton2]
+        cell.rightButtons = [deleteButton, editButton]
         cell.rightExpansion.buttonIndex = 0
     }
     
@@ -103,7 +117,6 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
         let alertController = UIAlertController(title: "Are you sure you want to delete this data?",  message: "This action cannot be undone.", preferredStyle: .alert)
         
         let deleteAction = UIAlertAction(title: "Delete", style: .default, handler: { action in
-            //let uniqueID = self.persons?[indexPath.row].id
             let selectedPerson = self.persons?[indexPath.row]
             
             ApiManager.sharedInstance.delete(person: selectedPerson!, completion: { (success) in
@@ -123,16 +136,16 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Identifier.Segue.toAddPerson {
-                let dest = segue.destination as! AddPersonVC
-                dest.personToEdit = personToEdit
+            let dest = segue.destination as! AddPersonVC
+            dest.personToEdit = personToEdit
         }
     }
-
-    // GET request to /people
+    
     func getPersons() {
-        //makeGetCall()
         ApiManager.sharedInstance.getPersons(completion: { (persons) in
-            self.persons = persons
+            self.persons = persons.sorted(by: { (person1, person2) -> Bool in
+                person1.name < person2.name
+            })
             self.tableView.reloadData()
         })
     }
@@ -153,5 +166,5 @@ extension MainViewController : UITableViewDelegate, UITableViewDataSource {
         configureSwipeButtons(cell: cell, indexPath: indexPath)
         return cell
     }
-
+    
 }
