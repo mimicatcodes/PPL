@@ -1,0 +1,15 @@
+PODS:
+  - IQKeyboardManagerSwift (4.0.7)
+  - MGSwipeTableCell (1.5.6)
+
+DEPENDENCIES:
+  - IQKeyboardManagerSwift
+  - MGSwipeTableCell
+
+SPEC CHECKSUMS:
+  IQKeyboardManagerSwift: 58bbcf46b5cf9fd4ed625d28a60cb2fbae4ab0f4
+  MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
+
+PODFILE CHECKSUM: 5c2561f214c724fb2698ebbab8f1846448a6e8d6
+
+COCOAPODS: 1.2.0
