@@ -2,7 +2,7 @@
 
 ![people and the city](https://cloud.githubusercontent.com/assets/19986066/24328443/b4e991f0-11b7-11e7-9a81-e27b8207b4e0.png)
 
-<strong>People and the City</strong>, an interactive iOS app that makes various HTTP requests to the server called PPL. Using this app, you can add different people with their name and favorite city information. This app is designed to provide an admin of the server an option to manage the database easily and efficiently on a mobile platform. As an admin, you can do anything you want - add a person object with attributes of name and favorite city, edit the information and even delete it. Every action you make on this app will immediately be reflected to the server. 
+<strong>People and the City</strong>is an interactive iOS app that makes various HTTP requests to the server called PPL. Using this app, you can add different people with their name and favorite city information. This app is designed to provide an admin of the server an option to manage the database easily and efficiently on a mobile platform. As an admin, you can do anything you want - add a person object with attributes of name and favorite city, edit the information and even delete it. Every action you make on this app will immediately be reflected to the server. 
 
 To use or test the application, please do the following:
 
