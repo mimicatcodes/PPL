@@ -32,12 +32,12 @@ class ApiManager: NSObject {
             }
             
             guard let data_ = data else { return }
-
+            
             do {
-                let json = try JSONSerialization.jsonObject(with: data_, options: [])
+                guard let json = try JSONSerialization.jsonObject(with: data_, options: []) as? [JSON] else { return }
                 var persons: [Person] = []
                 
-                for person in json as! [JSON] {
+                for person in json {
                     let newPerson = Person(json: person)
                     persons.append(newPerson)
                 }
